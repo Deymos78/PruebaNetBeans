@@ -31,21 +31,24 @@ public class gestorMovimientos {
     
     public static String[][] colocarCelulas(int celulas,int x, int y, String tablero[][]){
         Random aleatorio = new Random ();
-        //Colocamos las celulas aleatoriamente en el tablero
+        
         int numX;
         int numY;
         //Colocamos celulas aleatorias en el tablero
         for (int i = 0; i < celulas; i++) {
-            do {                
+            do {         
+                //Seleccionamos numeros aleatorios en funcion del tamaño del tablero para colocar las celulas
                 numX=aleatorio.nextInt(x);
                 numY=aleatorio.nextInt(y);
-            } while (!tablero[numX][numY].equals("*"));
+            } while (!tablero[numX][numY].equals("*"));//Solo permitimos que se sobreescriba si la celula esta muerta
             tablero[numX][numY]="C";
         }
         return tablero;
     }
 
     public static String[][] rellenarTableroAuxoPrincipal(int x, int y, String tableroAux[][], String tablero[][]){
+        //Clonamos el tablero Principal y lo guardamos en el tablero Auxiliar
+        //TAMBIEN SE PUEDE HACER A LA INVERSA
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 //De esta forma tendremos dos tableros iguales
@@ -56,10 +59,13 @@ public class gestorMovimientos {
     }
     
     public static void imprimirtablero(int x, int y, String[][] tablero){
+        //Recorremos el tablero que recibimos
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
+                //Imprimimos el valor  del tablero en esa posicion
                 System.out.print(tablero[i][j]+" ");
             }
+            //Hacemos un salto cuando llege al final de la fila del tablero
             System.out.println("");  
         }
     }
@@ -68,11 +74,14 @@ public class gestorMovimientos {
         int contadorCelulasVecinas=0;
         for (int k = -1; k < 2; k++) {
             for (int l = -1; l < 2; l++) {
-                //COMPROBAMOS LOS LIMITES DEL TABLERO
+                //COMPROBAMOS LOS LIMITES DEL TABLERO, 
                 if((i+k)<0 ||(i+k)>=x || (j+l)<0 || (j+l)>=y || (k==0&&l==0) ){
-
+                    //Aqui se pondria una accion si fuera necesaria
+                    //System.out.println("Fuera de los limites");
                 }else{
+                    //Si cumplimos las condiciones entonces sobreescribimos el valor 
                     if(tablero[(i+k)][(j+l)].equals("C")){
+                        //Incrementamos el valor de la variable contador
                         contadorCelulasVecinas++;
                     }
 
@@ -96,8 +105,8 @@ public class gestorMovimientos {
                     tableroAux[i][j]="*";
                 }
             }
-        }else if(estado==0){
-            if(celulasVecinas==3){
+        }else if(estado==0){//Sera una celula muerta
+            if(celulasVecinas==3){//Comprobamos si tiene suficientes celulas vecinas para que reviva
                 tableroAux[i][j]="C";
             }
         }

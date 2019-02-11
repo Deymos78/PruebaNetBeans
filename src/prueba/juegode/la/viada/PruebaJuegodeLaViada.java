@@ -19,14 +19,14 @@ public class PruebaJuegodeLaViada {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Instanciasmos un objeto de la clase Scanner
+        //Instanciasmos un objeto de la clase Scanner para recoger los datos que el usuario introduzca
         Scanner teclado = new Scanner(System.in);
 
         //Mostramos un mensaje inicial con instrucciones
         gestorMovimientos.mensajeInicial();
         
-        //PEDIMOS LA DIMENSION DEL TABLERO Y EL NUMERO DE CELULAS QUE TENDRA
-        //NO CONTROLAMOS LOS DATOS QUE INTRODUZCA EL USUARIO
+        //PEDIMOS LA DIMENSION DEL TABLERO Y EL NUMERO DE CELULAS QUE TENDRA EL TABLERO
+        //NO CONTROLAMOS LOS DATOS DE ENTRADA POR PARTE DEL USUARIO
         System.out.println("Introduce las filas");
         int tableroX=teclado.nextInt();
         System.out.println("Introduce las columnas");
